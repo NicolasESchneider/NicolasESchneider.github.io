@@ -29,10 +29,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
     playButton.innerText = "P L A Y"
     playButton.id = 'playButton'
     playButton.addEventListener("click", startGame )
-    playButton.style
    
     const playGame = setInterval( () => {
-        canvas.style.border=`3px solid ${fadeIn(255,0,0,frame)}`
+        canvas.style.border=`3px solid ${fadeIn(255,0,0,frame + 20)}`
 
         
         instructOne.style.color = `${fadeIn(255, 255, 255, frame - 80)}`
