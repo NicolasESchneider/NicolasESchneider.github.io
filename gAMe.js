@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     playButton.addEventListener("click", startGame )
    
     const playGame = setInterval( () => {
-        canvas.style.border=`3px solid ${fadeIn(255,0,0,frame + 20)}`
+        canvas.style.border=`3px solid ${fadeIn(90,90,280,frame + 20)}`
 
         
         instructOne.style.color = `${fadeIn(255, 255, 255, frame - 80)}`
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         game.draw()
-        playButton.style.opacity = `${elementFadeIn(frame - 200)}`
+
         if (game.menu === 1){
             
             if (!buttonActive){
@@ -52,19 +52,29 @@ document.addEventListener('DOMContentLoaded', (e) => {
         
             }
 
-    
-         
-
-        }
-
-
-
-        if (game.started === false && game.menu === 0){
+        } else if (game.started === false && game.menu === 0){
             game.started = true;
+
+            canvas.style.background = "rgb(90, 90, 280)";
+            let music = document.createElement("audio");
+            music.src ='Previous-Poaceae.m4a';
+            music.setAttribute("preload", "auto");
+            music.id = "music"
+            music.setAttribute("controls", "none");
+            music.setAttribute("autoplay", "true");
+            music.loop = true;
+            music.style.display = "none";
+            document.body.appendChild(music);
+
             setTimeout( ()=>{
                 game.endTutorial();
             }, 5000)
+
+        } else if (game.menu === 2){
+            
         }
+
+
         ++frame;
     },15)
 

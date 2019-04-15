@@ -139,6 +139,7 @@ export default class Game{
                         if(collisionBallCheck(this.player, thing) && !this.lose){
                             alert(`you lose! final score: ${this.score}`)
                             this.lose = true;
+                            this.menu = 2;
                             document.location.reload(true)
                         }
                         
@@ -160,6 +161,11 @@ export default class Game{
                 this.ctx.strokeText("Grav Ball", this.canvas.width/2, this.canvas.width/2 )
 
                 this.ctx.closePath();
+                break;
+            case 2:
+
+                document.removeChild(document.getElementById("music"));
+                document.getElementById(highScoreForm).style('display','flex');
                 break;
 
             

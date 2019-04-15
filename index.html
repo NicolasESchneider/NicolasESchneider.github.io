@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <meta charset="utf-8" />
     <title>Grav Ball</title>
     <link href="https://fonts.googleapis.com/css?family=Orbitron:700" rel="stylesheet">
@@ -11,16 +13,16 @@
 
             font-family: 'Orbitron', sans-serif;
             background: black;
-  
+
             text-align: center;
         }
-
-
+        a{color:white;}
+        i{color:white;}
 
         canvas {
             display: block;
 
-   
+            background: transparent;
             clip-path: polygon(
                 0% 5%,     /* top left */
                 5% 0%,     /* top left */
@@ -45,36 +47,27 @@
             height: 100%;
 
         }
+        form{
+            display: none;  
+        }
         .game > div{
             min-width: 300px;;
             min-height: 100%;
              margin-left: 45px; 
         }
-
+        footer{
+            color: white;
+        }
+       
         #Instructions{
             margin-top: 30%;
             margin-left: 45px;
             word-wrap: normal;
         }
         #playButton{
-            clip-path: polygon(
-                0% 3%,     /* top left */
-                3% 0%,     /* top left */
-                97% 0%,    /* top right */
-                100% 3%,   /* top right */
-                100% 97%,  /* bottom right */
-                97% 100%,  /* bottom right */
-                3% 100%,   /* bottom left */
-                0% 97%      /* bottom left */
-            );
-            border: white 3px solid;
-            
-            position: fixed;
-            left: 38.5vw;
-            top: 550px;
-            width: 400px;
-            height: 50px;
-            color: white;
+           display: hidden;
+           visibility: none;
+           opacity: 0;
         }
         
     </style>
@@ -104,7 +97,8 @@
             <br>
             <br>
             <p id="instruct4">
-                Good Luck! You're going to need it...
+                Good Luck! You're going to need it... <br>
+                Press Space whenever you're ready to start!
 
             </p>
         
@@ -113,7 +107,22 @@
         <canvas id="Canvas" width="700" height="700"></canvas>
         <div><h2 id="score-card"></h2></div>
     </div>
- 
+    <footer>
+        <p>An original game by Nicolas Schneider</p>
+        <div>
+            <a href="https://www.linkedin.com/in/nicolas-schneider-01/"><i class="fab fa-linkedin-in"></i></a>
+            <a><i class="fab fa-github"></i></a>
+            <a><i class="fas fa-user-circle"></i></a>
+        </div>
+    </footer>
+
+    <form>
+        <input id="score" readOnly/> 
+        <input id="name" type="text" placeholder="enter your name" />
+
+    
+    </form>
+   
 </body>
 
 </html>
