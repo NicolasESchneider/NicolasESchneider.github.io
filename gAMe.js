@@ -1,15 +1,16 @@
 import Game from './GameObjects/game';
-import { fadeIn, elementFadeIn } from './GameLogic/opacity'
+import { fadeIn, elementFadeIn, wavyGradient } from './GameLogic/opacity'
 
 document.addEventListener('DOMContentLoaded', (e) => {
 
     var canvas = document.getElementById("Canvas");
     var ctx = canvas.getContext("2d");
     var buttonActive = false;
-    var instructOne = document.getElementById("instruct1")
-    var instructTwo = document.getElementById("instruct2")
-    var instructThree = document.getElementById("instruct3")
-    var instructFour = document.getElementById("instruct4")
+    var instructOne = document.getElementById("instruct1");
+    var instructTwo = document.getElementById("instruct2");
+    var instructThree = document.getElementById("instruct3");
+    var instructFour = document.getElementById("instruct4");
+    var footer = document.getElementById("footer");
     let game = new Game(canvas, ctx);
     let frame = 0;
     // faded
@@ -31,7 +32,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
     playButton.addEventListener("click", startGame )
    
     const playGame = setInterval( () => {
-        canvas.style.border=`3px solid ${fadeIn(90,90,280,frame + 20)}`
+        let border = frame;
+        while(border > 360){
+            border -= 360;
+        }
+        canvas.style.border=`3px solid hsl(${border},45%,76%)`;
+        canvas.style.opacity = elementFadeIn(frame);
+        footer.style.opacity = elementFadeIn(frame);
+        footer.style.color = `hsl(${ border }, 45%, 76%)`;
 
         
         instructOne.style.color = `${fadeIn(255, 255, 255, frame - 80)}`
@@ -54,8 +62,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
         } else if (game.started === false && game.menu === 0){
             game.started = true;
-
-            canvas.style.background = "rgb(90, 90, 280)";
+            
+            
             let music = document.createElement("audio");
             music.src ='Previous-Poaceae.m4a';
             music.setAttribute("preload", "auto");
@@ -70,8 +78,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 game.endTutorial();
             }, 5000)
 
-        } else if (game.menu === 2){
-            
+        } else {
+            canvas.style.background = wavyGradient(frame)
         }
 
 

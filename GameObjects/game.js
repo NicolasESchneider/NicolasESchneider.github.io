@@ -38,6 +38,11 @@ export default class Game{
     Opacity(){
         return Math.min(this.frameIDX * 0.005, 1)
     }
+    startGame(){
+        this.money = new Coin(ctx);
+        this.entities = [this.money];
+        this.player = new Player(ctx);
+    }
 
    
     keyDownHandler(e){
@@ -140,7 +145,7 @@ export default class Game{
                             alert(`you lose! final score: ${this.score}`)
                             this.lose = true;
                             this.menu = 2;
-                            document.location.reload(true)
+                            // document.location.reload(true)
                         }
                         
                     }
@@ -150,12 +155,16 @@ export default class Game{
                 this.player.draw(grav);
                 break;
             case 1: 
+                let color = this.frameIDX
+                while (color > 360){
+                    color -= 360;
+                };
                 this.ctx.beginPath();
-     
+                
                 this.ctx.fillStyle = "black";
                 this.ctx.fillRect(50, 50, 600, 600);
                 this.ctx.font = "48px Orbitron";
-                this.ctx.strokeStyle = `rgba(255,255,255,${this.Opacity()})`
+                this.ctx.strokeStyle = `hsl(${color},45%,76%)`
                 this.ctx.lineWidth = 3;
                 this.ctx.textAlign = "center"
                 this.ctx.strokeText("Grav Ball", this.canvas.width/2, this.canvas.width/2 )
@@ -163,9 +172,13 @@ export default class Game{
                 this.ctx.closePath();
                 break;
             case 2:
-
-                document.removeChild(document.getElementById("music"));
-                document.getElementById(highScoreForm).style('display','flex');
+ 
+                this.ctx.fillStyle = "#efefef";
+           
+                document.getElementById("music").stop;
+                document.getElementById("form").style.display = 'flex';
+                document.getElementById("score").value = this.score
+                this.entities = [];
                 break;
 
             

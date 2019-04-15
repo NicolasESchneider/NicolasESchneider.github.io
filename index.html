@@ -16,13 +16,12 @@
 
             text-align: center;
         }
-        a{color:white;}
+        a{font-size: 45px; margin: 10px;color: inherit;}
         i{color:white;}
 
         canvas {
             display: block;
 
-            background: transparent;
             clip-path: polygon(
                 0% 5%,     /* top left */
                 5% 0%,     /* top left */
@@ -58,7 +57,12 @@
         footer{
             color: white;
         }
-       
+        form{
+            position: relative;
+            background: white;
+            color: white;
+            top:50%;
+        }
         #Instructions{
             margin-top: 30%;
             margin-left: 45px;
@@ -107,7 +111,7 @@
         <canvas id="Canvas" width="700" height="700"></canvas>
         <div><h2 id="score-card"></h2></div>
     </div>
-    <footer>
+    <footer id="footer">
         <p>An original game by Nicolas Schneider</p>
         <div>
             <a href="https://www.linkedin.com/in/nicolas-schneider-01/"><i class="fab fa-linkedin-in"></i></a>
@@ -116,7 +120,8 @@
         </div>
     </footer>
 
-    <form>
+    <form id="form">
+        HELLO
         <input id="score" readOnly/> 
         <input id="name" type="text" placeholder="enter your name" />
 
