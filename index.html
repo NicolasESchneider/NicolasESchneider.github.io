@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <meta charset="utf-8" />
@@ -38,7 +39,20 @@
         }
         #score-card{
             margin-right: 10px;
-            color: white;
+            width: 100px;
+            
+        }
+        #score-container{
+            display:flex;
+            flex-direction: column;
+        }
+        li{
+            margin-top: 15px;
+            text-align: center;
+            color: black;
+            background: white;
+            padding: 5px;   
+            border-radius: 5px;
         }
         .game{
             display:flex;  
@@ -46,8 +60,8 @@
             height: 100%;
 
         }
-        form{
-            display: none;  
+        form > h1{
+            padding 5px;
         }
         .game > div{
             min-width: 300px;;
@@ -58,11 +72,16 @@
             color: white;
         }
         form{
-            position: relative;
-            background: white;
+            padding: 5px;
+            display: none; 
+            position: absolute;
+            flex-direction: column;
             color: white;
-            top:50%;
+            top: 45%;
+            left: 42%;
         }
+        input, button{background: white;
+        color: black;}
         #Instructions{
             margin-top: 30%;
             margin-left: 45px;
@@ -73,10 +92,18 @@
            visibility: none;
            opacity: 0;
         }
+        .scorecontainer{
+            display:flex;
+            color:white;
+       
+        }
+        ul{list-style: none;}
         
     </style>
 
     <script src='bundle.js'></script>
+
+   
 </head>
 
 <body>
@@ -109,21 +136,32 @@
         
         </p></div>
         <canvas id="Canvas" width="700" height="700"></canvas>
-        <div><h2 id="score-card"></h2></div>
+        <div class="scorecontainer">
+            <h2 id="score-card">Score: --</h2>
+            <div id="highScores">
+                Top Ten Grav Ballas<br>
+                <ul id="scoreList">
+
+                </ul>
+            </div>
+        </div>
     </div>
     <footer id="footer">
-        <p>An original game by Nicolas Schneider</p>
+        <p>Game concept and music by Nicolas Schneider</p>
         <div>
-            <a href="https://www.linkedin.com/in/nicolas-schneider-01/"><i class="fab fa-linkedin-in"></i></a>
-            <a><i class="fab fa-github"></i></a>
-            <a><i class="fas fa-user-circle"></i></a>
+            <a  href="https://www.linkedin.com/in/nicolas-schneider-01/"><i id="icon3" class="fab fa-linkedin-in"></i></a>
+            <a><i id="icon" class="fab fa-github"></i></a>
+            <a><i id="icon2" class="fas fa-user-circle"></i></a>
         </div>
     </footer>
 
     <form id="form">
-        HELLO
-        <input id="score" readOnly/> 
+        <h1>
+            Submit Your Score
+        </h1>
         <input id="name" type="text" placeholder="enter your name" />
+        <input id="score" readOnly/> 
+        <button id="submit">Submit Score</button>
 
     
     </form>

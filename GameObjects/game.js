@@ -1,5 +1,5 @@
 import Player from './player';
-import {gravFlipLeft, gravFlipRight, gravFlipUp} from '../GameLogic/grav_flip';
+import {gravFlipLeft, gravFlipRight} from '../GameLogic/grav_flip';
 import { rotate } from '../GameLogic/canvas_rotation';
 import { collisionBallCheck } from '../GameLogic/collision';
 import Spawner from './spawner';
@@ -52,12 +52,6 @@ export default class Game{
             this.player.keyLeft = 1;
         } else if (e.key === ' ' || e.key === 'Spacebar' || e.key == "Up" || e.key == "ArrowUp" || e.key == "w" || e.key == "W") {
             this.player.keyJump = 1;
-        } else if (e.key == "5"){
-            var debug = () =>{
-                debugger
-                console.log("*screams internally*")
-            }
-            debug.call(this);
         }
         
     }
@@ -127,7 +121,7 @@ export default class Game{
                 this.ctx.fillStyle = "#efefef";
                 this.ctx.fillRect(50, 50, 600, 600);
                 
-                document.getElementById("score-card").innerHTML = this.score
+                document.getElementById("score-card").innerHTML = "Score: " + this.score
                 
                 this.entities.forEach( (thing, i) => {
                     if (thing instanceof Coin){
@@ -135,14 +129,14 @@ export default class Game{
                             this.entities = this.entities.slice(0,i).concat(this.entities.slice(i+1));
                             this.entities.push(new Coin(this.ctx));
                             this.score += 1;
-                            document.getElementById("score-card").innerHTML = this.score
+                            document.getElementById("score-card").innerHTML = "Score: " + this.score
                         }
                         
                     } else if(thing instanceof Spawner){
                         if(!thing.active && this.activateSpawner(thing, i)){}
                     } else {
                         if(collisionBallCheck(this.player, thing) && !this.lose){
-                            alert(`you lose! final score: ${this.score}`)
+
                             this.lose = true;
                             this.menu = 2;
                             // document.location.reload(true)
@@ -175,7 +169,6 @@ export default class Game{
  
                 this.ctx.fillStyle = "#efefef";
            
-                document.getElementById("music").stop;
                 document.getElementById("form").style.display = 'flex';
                 document.getElementById("score").value = this.score
                 this.entities = [];

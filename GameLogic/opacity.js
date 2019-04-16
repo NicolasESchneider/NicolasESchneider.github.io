@@ -22,3 +22,9 @@ function intToRGB(i) {
         .toUpperCase();
     return "00000".substring(0, 6 - c.length) + c;
 }
+
+export const rotateGradient = function(cssString, frame){
+
+    return cssString.slice(0,16) + `${frame}deg` + cssString.slice(22)
+
+}

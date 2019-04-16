@@ -1,8 +1,69 @@
 import Game from './GameObjects/game';
-import { fadeIn, elementFadeIn, wavyGradient } from './GameLogic/opacity'
+import { fadeIn, elementFadeIn, wavyGradient, rotateGradient } from './GameLogic/opacity'
+// import { save } from './highscores';
 
 document.addEventListener('DOMContentLoaded', (e) => {
+  
+   
+    
+    var config = {
+        apiKey: "AIzaSyD5da5VdY_xRMVKEMYthAGVmRiekALaEv4",
+    authDomain: "grav-ball-f2b73.firebaseapp.com",
+    databaseURL: "https://grav-ball-f2b73.firebaseio.com",
+    projectId: "grav-ball-f2b73",
+    storageBucket: "grav-ball-f2b73.appspot.com",
+    messagingSenderId: "373906891112"
+    };
+    firebase.initializeApp(config);
+    const database = firebase.database();
+    const ref = database.ref('scores')
 
+    const saveScore = function(){
+        const newScore = {}
+        newScore.name = document.getElementById("name").value;
+        newScore.score = document.getElementById("score").value;
+        if (newScore.name){
+            ref.push(newScore);
+        }
+
+    }
+    function errData (err) {
+        console.log('Error!');
+        console.log(err);
+    };
+    ref.on('value', gotData, errData)
+
+    
+   function gotData (data){
+        let scores = data.val();
+        let scoreList = Object.values(scores);
+
+        console.log(scoreList)
+        scoreList.sort( (score1, score2) => {
+            return score2.score - score1.score
+
+        })
+
+        let highScoreListLeng = Math.min(scoreList.length, 10)
+        const ul = document.getElementById("scoreList");
+        let highScores = scoreList.slice(0,highScoreListLeng)
+
+        for(let scoreIDX = 0; scoreIDX < highScores.length; scoreIDX++){
+            if (highScores[scoreIDX].name && highScores[scoreIDX].score){
+
+                var name = highScores[scoreIDX].name;
+                var score = highScores[scoreIDX].score;
+                let li = document.createElement('li');
+                li.innerHTML = name + " :" + score;
+                li.id = scoreIDX
+                ul.appendChild(li);
+            }
+        }
+
+
+    };
+
+    
     var canvas = document.getElementById("Canvas");
     var ctx = canvas.getContext("2d");
     var buttonActive = false;
@@ -11,8 +72,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
     var instructThree = document.getElementById("instruct3");
     var instructFour = document.getElementById("instruct4");
     var footer = document.getElementById("footer");
+    var icon = document.getElementById("icon");
+    var icon2 = document.getElementById("icon2");
+    var icon3 = document.getElementById("icon3");
     let game = new Game(canvas, ctx);
     let frame = 0;
+
+    document.getElementById('submit').onclick = () =>{
+        saveScore();
+    }
     // faded
     const startGame = function() {
         playButton.removeEventListener('click', startGame);
@@ -32,20 +100,26 @@ document.addEventListener('DOMContentLoaded', (e) => {
     playButton.addEventListener("click", startGame )
    
     const playGame = setInterval( () => {
-        let border = frame;
-        while(border > 360){
-            border -= 360;
-        }
+        let border = frame % 360;
+        
         canvas.style.border=`3px solid hsl(${border},45%,76%)`;
         canvas.style.opacity = elementFadeIn(frame);
         footer.style.opacity = elementFadeIn(frame);
         footer.style.color = `hsl(${ border }, 45%, 76%)`;
+        icon.style.color = `hsl(${border}, 45%, 76%)`;
+        icon2.style.color = `hsl(${border}, 45%, 76%)`;
+        icon3.style.color = `hsl(${border}, 45%, 76%)`;
 
         
         instructOne.style.color = `${fadeIn(255, 255, 255, frame - 80)}`
         instructTwo.style.color = `${fadeIn(255, 255, 255, frame - 110)}`
         instructThree.style.color = `${fadeIn(255, 255, 255, frame - 140)}`
         instructFour.style.color = `${fadeIn(255, 255, 255, frame - 170)}`
+        if (document.getElementById("0")){
+            document.getElementById("0").style.background = rotateGradient("linear-gradient(273deg,rgba(210,186,86,1) 12%,rgba(227,203,105,1) 43%,rgba(246,191,93,1) 88%)", border);
+            document.getElementById("1").style.background = rotateGradient("linear-gradient(148deg, rgba(187,234,235,1) 3%, rgba(222,215,215,1) 44%, rgba(171,175,175,1) 100%)", border);
+            document.getElementById("2").style.background = rotateGradient("linear-gradient(259deg, rgba(254,163,44,1) 3%, rgba(246,112,34,1) 63%, rgba(224,157,47,1) 98%)", border);
+        }
         
        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
