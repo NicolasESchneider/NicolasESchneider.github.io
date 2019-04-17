@@ -25,13 +25,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
         if (newScore.name){
             ref.push(newScore);
         }
+        document.getElementById('scoreList').style.display = "none"
 
     }
     function errData (err) {
         console.log('Error!');
         console.log(err);
     };
-    ref.on('value', gotData, errData)
+    ref.once('value', gotData, errData)
 
     
    function gotData (data){
@@ -49,8 +50,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
         let highScores = scoreList.slice(0,highScoreListLeng)
 
         for(let scoreIDX = 0; scoreIDX < highScores.length; scoreIDX++){
-            if (highScores[scoreIDX].name && highScores[scoreIDX].score){
-
+            if (highScores[scoreIDX].name && highScores[scoreIDX].score && !document.getElementById('9')){
+            
                 var name = highScores[scoreIDX].name;
                 var score = highScores[scoreIDX].score;
                 let li = document.createElement('li');
