@@ -101,20 +101,20 @@ document.addEventListener('DOMContentLoaded', (e) => {
    
     const playGame = setInterval( () => {
         let border = frame % 360;
-        
-        canvas.style.border=`3px solid hsl(${border},45%,76%)`;
+        //fadeIn
         canvas.style.opacity = elementFadeIn(frame);
         footer.style.opacity = elementFadeIn(frame);
+        instructOne.style.color = `${fadeIn(255, 255, 255, frame - 80)}`
+        instructTwo.style.color = `${fadeIn(255, 255, 255, frame - 110)}`
+        instructThree.style.color = `${fadeIn(255, 255, 255, frame - 140)}`
+        instructFour.style.color = `${fadeIn(255, 255, 255, frame - 170)}`
+        //color
+        canvas.style.border=`3px solid hsl(${border},45%,76%)`;
         footer.style.color = `hsl(${ border }, 45%, 76%)`;
         icon.style.color = `hsl(${border}, 45%, 76%)`;
         icon2.style.color = `hsl(${border}, 45%, 76%)`;
         icon3.style.color = `hsl(${border}, 45%, 76%)`;
 
-        
-        instructOne.style.color = `${fadeIn(255, 255, 255, frame - 80)}`
-        instructTwo.style.color = `${fadeIn(255, 255, 255, frame - 110)}`
-        instructThree.style.color = `${fadeIn(255, 255, 255, frame - 140)}`
-        instructFour.style.color = `${fadeIn(255, 255, 255, frame - 170)}`
         if (document.getElementById("0")){
             document.getElementById("0").style.background = rotateGradient("linear-gradient(273deg,rgba(210,186,86,1) 12%,rgba(227,203,105,1) 43%,rgba(246,191,93,1) 88%)", border);
             document.getElementById("1").style.background = rotateGradient("linear-gradient(148deg, rgba(187,234,235,1) 3%, rgba(222,215,215,1) 44%, rgba(171,175,175,1) 100%)", border);

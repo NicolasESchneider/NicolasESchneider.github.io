@@ -78,7 +78,17 @@
             flex-direction: column;
             color: white;
             top: 45%;
-            left: 42%;
+            left: 40%;
+            clip-path: polygon(
+                0% 5%,     /* top left */
+                5% 0%,     /* top left */
+                95% 0%,    /* top right */
+                100% 5%,   /* top right */
+                100% 95%,  /* bottom right */
+                95% 100%,  /* bottom right */
+                5% 100%,   /* bottom left */
+                0% 95%      /* bottom left */
+            );
         }
         input, button{background: white;
         color: black;}
