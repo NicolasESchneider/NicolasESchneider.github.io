@@ -3875,3 +3875,6 @@ input, select, textarea {
 	p{
 		font-weight: 500;
 	}
+	#publish img{
+		object-position: top;
+	}
