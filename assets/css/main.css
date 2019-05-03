@@ -3868,3 +3868,10 @@ input, select, textarea {
 		}
 
 	}
+
+	#email, #phone{
+		font-weight: 600;
+	}
+	p{
+		font-weight: 500;
+	}
